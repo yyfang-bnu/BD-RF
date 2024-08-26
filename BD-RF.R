@@ -63,4 +63,10 @@ result=replicate(5,rfcv(mypoints, points$BD),simplify = FALSE)
 error.cv=sapply(result,"[[","error.cv")
 matplot(result[[1]]$n.var,cbind(rowMeans(error.cv),error.cv),type = "l",lwd = c(2,rep(1,ncol(error.cv))),col = 1,lty = 1,log="x",xlab = "Number of variables",ylab="CV Error")
 
-
+#预测代码#
+pred.test<-predict(rf.train,newdata=test)
+pred.train<-predict(rf.train,newdata=train)
+write.csv(pred.train,"D:/Users/Desktop/running data/pred.S3_40.csv",row.names=FALSE)
+write.csv(pred.test,"D:/Users/Desktop/running data/pred.test.S3_40.csv",row.names=FALSE)
+round(importance(rf.train),2)
+varImpPlot(rf.train)
